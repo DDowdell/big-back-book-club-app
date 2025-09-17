@@ -53,7 +53,3 @@ def book_index(request):
 #         'True Crime',
 #     ),
 # ]
-
-
-def book_index(request):
-    return render(request, 'books/index.html', {'books': books})
