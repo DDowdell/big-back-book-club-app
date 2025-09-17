@@ -6,8 +6,11 @@
 {% block content %}
 
 <div class='page-header'>
-  <h1>Add a Book</h1>
-  <img src='' alt='Books pic' />
+  {% if book %}
+    <h1>Edit {{book.title}}
+  {% else %}
+    <h1>Add a Book</h1>
+  {% endif %}
 </div>
 
 <form action='' method='post' class='form-container'>

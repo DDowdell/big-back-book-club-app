@@ -13,6 +13,11 @@
     <h1>{{book.title}}</h1>
       <h2>A {{book.genre}} book series about '{{book.description}}'.</h2>
       <p>Written by {{book.author}}</p>
+
+      <div class="book-actions">
+        <a href="{% url 'book-update' book.id %}" class="btn warn">Edit</a>
+        <a href="{% url 'book-delete' book.id %}" class="btn danger">Delete</a>
+      </div>
   </div>
 </section>
 {% endblock %}
