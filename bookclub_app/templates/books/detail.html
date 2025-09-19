@@ -3,21 +3,56 @@
 {% block head %}
 <link rel='stylesheet' href='{% static 'css/books/book-detail.css' %}' />
 {% endblock %} 
-{% block content %}
 
+{% block content %}
 <section class='book-container'>
   <div class='book-img'>
     <img src='' alt='A book cover' />
   </div>
   <div class='book-details'>
-    <h1>{{book.title}}</h1>
-      <h2>A {{book.genre}} book series about '{{book.description}}'.</h2>
-      <p>Written by {{book.author}}</p>
+    <h1>{{ book.title }}</h1>
+    <h2>A {{ book.genre }} book series about '{{ book.description }}'.</h2>
+    <p>Written by {{ book.author }}</p>
 
-      <div class="book-actions">
-        <a href="{% url 'book-update' book.id %}" class="btn warn">Edit</a>
-        <a href="{% url 'book-delete' book.id %}" class="btn danger">Delete</a>
-      </div>
+    <div class="book-actions">
+      <a href="{% url 'book-update' book.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'book-delete' book.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
+
+<section class="comments">
+  <h3>Comments</h3>
+  <form method="POST" action="{% url 'add_comment' book.id %}">
+    {% csrf_token %}
+    <textarea name="content" placeholder="Add a comment..." required></textarea>
+    <button type="submit" class="btn">Submit Comment</button>
+  </form>
+
+  <ul class="comments-list">
+    {% for comment in comments %}
+      <li><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</li>
+    {% empty %}
+      <li>No comments yet. Be the first to comment!</li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section class="suggestions">
+  <h3>Suggestions</h3>
+  <form method="POST" action="{% url 'suggest_book' %}">
+    {% csrf_token %}
+    <input type="hidden" name="book_id" value="{{ book.id }}">
+    <button type="submit" class="btn">Suggest this book for next month</button>
+  </form>
+
+  <ul class="suggestions-list">
+    {% for suggestion in suggestions %}
+      <li><strong>{{ suggestion.user.username }}</strong> suggested this book.</li>
+    {% empty %}
+      <li>No suggestions yet. Suggest this book!</li>
+    {% endfor %}
+  </ul>
+</section>
+
 {% endblock %}
