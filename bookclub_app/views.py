@@ -25,9 +25,11 @@ def book_index(request):
 
 @login_required
 def book_detail(request, book_id):
-    book = Book.objects.get(id=book_id)
+    book = Book.objects.filter(id=book_id).first()
+    if book is None:
+      raise Http404('Book not found')
     comments = Comment.objects.filter(book=book)
-    suggestions = BookSuggestion.objects.all()
+    suggestions = BookSuggestion.objects.filter(suggested_book=book)
     return render(request, 'books/detail.html', {'book': book, 'comments': comments, 'suggestions': suggestions})
 
 
