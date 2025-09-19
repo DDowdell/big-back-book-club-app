@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel='stylesheet' href='{% static 'css/community.css' %}' />
+{% endblock %}
+
+{% block content %}
+  <section class='current-book'>
+    {% if current_book %}
+      <h1>Current Book: {{ current_book.title }}</h1>
+      <p>Author: {{ current_book.author }}</p>
+      <p>Genre: {{ current_book.genre }}</p>
+      <p>Description: {{ current_book.description }}</p>
+      <img src="" alt="{{ current_book.title }} cover">
+    {% else %}
+      <h1>No current book selected.</h1>
+    {% endif %}
+  </section>
+
+  <section class='comments'>
+    <h2>Comments</h2>
+    <ul>
+      {% for comment in comments %}
+        <li>
+          <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+        </li>
+      {% empty %}
+        <li>No comments yet. Be the first to comment!</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Add a Comment</h3>
+    <form method="POST" action="{% url 'add_comment' current_book.id %}">
+      {% csrf_token %}
+      <textarea name="content" placeholder="Write your comment here..." required></textarea>
+      <button type="submit" class="btn">Submit Comment</button>
+    </form>
+  </section>
+
+  <section class='suggestions'>
+    <h2>Suggestions</h2>
+    <ul>
+      {% for suggestion in suggestions %}
+        <li>
+          <strong>{{ suggestion.user.username }}</strong> suggested this book.
+        </li>
+      {% empty %}
+        <li>No suggestions yet.</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Suggest a Book</h3>
+    <form method="POST" action="{% url 'suggest_book' %}">
+      {% csrf_token %}
+      <input type="hidden" name="book_id" value="{{ current_book.id }}">
+      <button type="submit" class="btn">Suggest this book</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,94 @@
+main {
+    padding: 20px;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.current-book {
+    background-color: white;
+    border-radius: var(--card-border-radius);
+    padding: 20px;
+    box-shadow: var(--card-box-shadow);
+    margin-bottom: 20px;
+}
+
+.current-book h1 {
+    font-size: var(--font-xxl);
+    color: var(--text-color);
+}
+
+.current-book img {
+    max-width: 100%;
+    height: auto;
+}
+
+.comments,
+.suggestions {
+    background-color: white;
+    border-radius: var(--card-border-radius);
+    padding: 20px;
+    box-shadow: var(--card-box-shadow);
+    margin-bottom: 20px;
+}
+
+.comments h2,
+.suggestions h2 {
+    font-size: var(--font-xl);
+    color: var(--text-color);
+}
+
+.comments ul,
+.suggestions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.comments ul li,
+.suggestions ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.comments form,
+.suggestions form {
+    margin-top: 20px;
+}
+
+.btn {
+    font-size: var(--font-l);
+    padding: 10px 20px;
+    border-radius: var(--card-border-radius);
+    border-width: 2px;
+    border-style: solid;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--button-bg-hover);
+    color: white;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: var(--card-border-radius);
+    border: 1px solid #ccc;
+    resize: none;
+}
+
+@media only screen and (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+
+    .current-book,
+    .comments,
+    .suggestions {
+        padding: 15px;
+    }
+}
