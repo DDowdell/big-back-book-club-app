@@ -83,11 +83,13 @@
 .suggestions-list {
   list-style-type: none;
   padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 .comments-list li,
 .suggestions-list li {
-  padding: 8px;
+  padding: 12px;
   border-bottom: 1px solid #ccc;
 }
 

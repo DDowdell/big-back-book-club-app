@@ -31,7 +31,10 @@
 
   <ul class="comments-list">
     {% for comment in comments %}
-      <li><strong>{{ comment.user.username }}:</strong> {{ comment.content }}</li>
+      <li>
+        <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+        <a href="{% url 'delete_comment' comment.id %}" class="btn danger">Delete</a>
+      </li>
     {% empty %}
       <li>No comments yet. Be the first to comment!</li>
     {% endfor %}
@@ -48,7 +51,10 @@
 
   <ul class="suggestions-list">
     {% for suggestion in suggestions %}
-      <li><strong>{{ suggestion.user.username }}</strong> suggested this book.</li>
+      <li>
+        <strong>{{ suggestion.user.username }}</strong> suggested this book.
+        <a href="{% url 'undo_suggestion' suggestion.id %}" class="btn danger">Undo</a>
+      </li>
     {% empty %}
       <li>No suggestions yet. Suggest this book!</li>
     {% endfor %}
