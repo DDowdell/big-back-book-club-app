@@ -18,6 +18,10 @@ main {
     color: var(--text-color);
 }
 
+.current-book p {
+    font-size: var(--font-reg);
+}
+
 .current-book img {
     max-width: 100%;
     height: auto;
@@ -26,6 +30,7 @@ main {
 .comments,
 .suggestions {
     background-color: white;
+    border-color: blue;
     border-radius: var(--card-border-radius);
     padding: 20px;
     box-shadow: var(--card-box-shadow);
@@ -79,6 +84,29 @@ textarea {
     border-radius: var(--card-border-radius);
     border: 1px solid #ccc;
     resize: none;
+}
+
+.all-books {
+    margin-top: 20px;
+}
+
+.all-books h2 {
+    font-size: var(--font-xxl);
+}
+
+.all-books ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.all-books li {
+    margin-bottom: 15px;
+    font-size: var(--font-l);
+}
+
+.all-books .book-details {
+    font-size: var(--font-reg);
+    color: blue;
 }
 
 @media only screen and (max-width: 768px) {

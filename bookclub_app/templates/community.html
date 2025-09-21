@@ -18,43 +18,22 @@
     {% endif %}
   </section>
 
-  <section class='comments'>
-    <h2>Comments</h2>
-    <ul>
-      {% for comment in comments %}
-        <li>
-          <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
-        </li>
-      {% empty %}
-        <li>No comments yet. Be the first to comment!</li>
-      {% endfor %}
-    </ul>
-
-    <h3>Add a Comment</h3>
-    <form method="POST" action="{% url 'add_comment' current_book.id %}">
-      {% csrf_token %}
-      <textarea name="content" placeholder="Write your comment here..." required></textarea>
-      <button type="submit" class="btn">Submit Comment</button>
-    </form>
+    <section class='all-books'>
+    <h2>All Books Submitted by Users</h2>
+    {% if all_books %}
+      <ul>
+        {% for book in all_books %}
+          <li>
+            <a href="{% url 'book-detail' book.id %}"><strong>{{ book.title }} by {{ book.author }}</strong>
+            <div class="book-details">
+            Submitted by {{ book.user.username }} (Joined: {{ book.user.date_joined|date:"Y-m-d" }})
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No books submitted by users yet.</p>
+    {% endif %}
   </section>
 
-  <section class='suggestions'>
-    <h2>Suggestions</h2>
-    <ul>
-      {% for suggestion in suggestions %}
-        <li>
-          <strong>{{ suggestion.user.username }}</strong> suggested this book.
-        </li>
-      {% empty %}
-        <li>No suggestions yet.</li>
-      {% endfor %}
-    </ul>
-
-    <h3>Suggest a Book</h3>
-    <form method="POST" action="{% url 'suggest_book' %}">
-      {% csrf_token %}
-      <input type="hidden" name="book_id" value="{{ current_book.id }}">
-      <button type="submit" class="btn">Suggest this book</button>
-    </form>
-  </section>
 {% endblock %}

@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+
 class Home(LoginView):
     template_name = "home.html"
 
@@ -45,6 +46,7 @@ def book_detail(request, book_id):
             "comments": comments,
             "suggestions": suggestions,
             "read_count": read_count,
+            "is_owner": book.user == request.user,
         },
     )
 
@@ -56,12 +58,20 @@ class BookCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+      
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class BookUpdate(LoginRequiredMixin, UpdateView):
     model = Book
     fields = ["author", "description", "genre", "is_current"]
 
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 class BookDelete(LoginRequiredMixin, DeleteView):
     model = Book
@@ -83,19 +93,16 @@ def signup(request):
     return render(request, "signup.html", context)
 
 
-@login_required
 def community_page(request):
     current_book = Book.objects.filter(is_current=True).first()
-    comments = Comment.objects.filter(book=current_book) if current_book else []
-    suggestions = BookSuggestion.objects.filter(suggested_book=current_book) if current_book else []
+    all_books = Book.objects.exclude(is_current=True)
 
     return render(
         request,
         "community.html",
         {
             "current_book": current_book,
-            "comments": comments,
-            "suggestions": suggestions,
+            "all_books": all_books,
         },
     )
 
