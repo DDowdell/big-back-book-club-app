@@ -9,7 +9,7 @@ class Book(models.Model):
     description = models.TextField(max_length=250)
     genre = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_current = models.BooleanField(default=False)  # to track book of the month
+    is_current = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

@@ -18,6 +18,7 @@
 
 .book-details {
   width: 98%;
+  justify-items: center;
 }
 
 .book-actions {

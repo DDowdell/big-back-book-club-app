@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class Home(LoginView):
     template_name = "home.html"
 
@@ -16,7 +15,7 @@ class Home(LoginView):
         context = super().get_context_data(**kwargs)
         context["current_book"] = Book.objects.filter(is_current=True).first()
         if self.request.user.is_authenticated:
-          context["user_books"] = Book.objects.filter(user=self.request.user)
+            context["user_books"] = Book.objects.filter(user=self.request.user)
         return context
 
 
@@ -60,7 +59,7 @@ class BookCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-      
+
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -74,6 +73,7 @@ class BookUpdate(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
 
 class BookDelete(LoginRequiredMixin, DeleteView):
     model = Book
@@ -107,6 +107,7 @@ def community_page(request):
             "all_books": all_books,
         },
     )
+
 
 @login_required
 def add_comment(request, book_id):

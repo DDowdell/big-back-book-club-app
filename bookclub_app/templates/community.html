@@ -12,7 +12,7 @@
       <p>Author: {{ current_book.author }}</p>
       <p>Genre: {{ current_book.genre }}</p>
       <p>Description: {{ current_book.description }}</p>
-      <img src="" alt="{{ current_book.title }} cover">
+      <img src="{% static 'css/images/hpbooks.png' %}" alt="{{ current_book.title }} cover">
     {% else %}
       <h1>No current book selected.</h1>
     {% endif %}

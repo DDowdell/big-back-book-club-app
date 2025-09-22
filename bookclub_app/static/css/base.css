@@ -1,21 +1,13 @@
-/* static/css/base.css  */
-
 html {
   box-sizing: border-box;
 }
 
-/* The Universal Selector */
-*, /* All elements*/
-*::before, /* All ::before pseudo-elements */
+*, 
+*::before, 
 *::after {
-  /* All ::after pseudo-elements */
-  /* height & width will now include border & padding by default
-     but can be over-ridden as needed */
   box-sizing: inherit;
 }
 
-/* resets font size to be 62.5% of the user preference - 
-     in most browser configurations this will be 10px */
 :root {
   font-size: 62.5%;
 }
@@ -96,6 +88,13 @@ nav li {
   padding: 5px 8px;
 }
 
+/* .background {
+    background-size: cover; 
+    height: 100vh;
+    width: 100%;
+    position: relative;
+} */
+
 .header-logo-container {
   margin: auto;
   padding: 10px 20px 0;
@@ -105,6 +104,7 @@ nav li {
 .logo-img {
   max-width: 20px;
   max-height: 20px;
+  place-items: left;
 }
 
 .page-header {
@@ -190,7 +190,6 @@ nav li {
     padding: 0 15px;
   }
 
-  /* visual fix to help align logo */
   .header-logo-container {
     padding-top: 3px;
   }
@@ -258,7 +257,6 @@ nav li {
   }
 
   .header-logo-container {
-    /* visual fix to help align logo */
     padding-top: 6px;
     width: 256px;
     height: 35px;

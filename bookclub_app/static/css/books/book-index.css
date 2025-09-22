@@ -36,3 +36,8 @@
   margin: 5px 0;
   font-size: var(--font-reg);
 }
+
+.list-img {
+  max-width: 100%;
+  max-height: 100%;
+}
