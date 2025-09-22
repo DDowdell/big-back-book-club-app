@@ -1,11 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
-  <link rel='stylesheet' href='{% static 'css/home.css' %}' />
-{% endblock %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
 
-  <section class='logo-container'>
-    <div class='book-container'></div>
-    <img src='' alt='Text reads: BigBack BookClub' />
-  </section>
+  <link rel='stylesheet' href='{% static 'css/home.css' %}' />
+
+{% endblock %} 
+{% block content %}
+
+<section class='logo-container'>
+  <div class='book-container'></div>
+  <img src='' alt='Text reads: BigBack BookClub' />
+</section>
 
 {% if not user.is_authenticated %}
   <section>
@@ -16,23 +21,36 @@
       <button type="submit" class="btn submit">Login</button>
     </form>
   </section>
-   {% else %}
-    <section class='book-list'>
-      <h1>Available Books</h1>
-      <ul>
-        {% for book in books %}
-          <li>
-            <h2><a href="{% url 'book-detail' book.id %}">{{ book.title }}</a></h2>
-            <p>Author: {{ book.author }}</p>
-            <p>Genre: {{ book.genre }}</p>
-            <p>Description: {{ book.description }}</p>
-          </li>
-        {% empty %}
-          <li>No books available at the moment.</li>
-        {% endfor %}
-      </ul>
-    </section>
- 
+{% else %}
+
+  <section class='current-book'>
+    <h1>Current Book</h1>
+    {% if current_book %}
+      <h2><a href="{% url 'book-detail' current_book.id %}">{{ current_book.title }}</a></h2>
+      <p>Author: {{ current_book.author }}</p>
+      <p>Genre: {{ current_book.genre }}</p>
+      <p>Description: {{ current_book.description }}</p>
+      {% if current_book.image %}
+        <img src="{{ current_book.image.url }}" alt="{{ current_book.title }} cover">
+      {% endif %}
+    {% else %}
+      <p>No current book available.</p>
+    {% endif %}
+  </section>
+
+  <section class='book-list'>
+    <h1>Your Other Books</h1>
+    <ul>
+      {% for book in user_books %}
+        <li>
+          <h3>{{ book.title }}</h3>
+          <p>Author: {{ book.author }}</p>
+        </li>
+      {% empty %}
+        <li>No book available at the moment.</li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endif %}
 
 {% endblock %}
