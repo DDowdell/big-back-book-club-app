@@ -15,7 +15,8 @@ class Home(LoginView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["current_book"] = Book.objects.filter(is_current=True).first()
-        context["user_books"] = Book.objects.filter(user=self.request.user)
+        if self.request.user.is_authenticated:
+          context["user_books"] = Book.objects.filter(user=self.request.user)
         return context
 
 
