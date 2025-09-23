@@ -6,14 +6,10 @@
 
 {% block content %}
 <section class='book-container'>
-  {% comment %} <div class='book-img'>
-    <img src='' alt='A book cover' />
-  </div> {% endcomment %}
   <div class='book-details'>
     <h1>{{ book.title }}</h1>
     <h2>A {{ book.genre }} book series about '{{ book.description }}'.</h2>
     <p>Written by {{ book.author }}</p>
-    {% comment %} <p>{{ read_count }} users have read this book.</p> {% endcomment %}
 
     <div class="book-actions">
       {% if is_owner %}
